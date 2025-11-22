@@ -18,16 +18,16 @@ locals {
 }
 
 # S3 bucket for static site
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-static-site-7e84fef1"
-
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
-  }
-
+#  resource "aws_s3_bucket" "my_bucket" {
+#  bucket = "my-static-site-7e84fef1"
+#
+#  website {
+#    index_document = "index.html"
+#    error_document = "error.html"
+#  }
+#
   # Remove ACLs; rely on bucket policy for public access
-  force_destroy = true
+#  force_destroy = true
 }
 
 # Bucket policy to allow public read for objects
