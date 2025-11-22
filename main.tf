@@ -32,7 +32,7 @@ locals {
 
 # Bucket policy to allow public read for objects
 resource "aws_s3_bucket_policy" "public_policy" {
-  bucket = aws_s3_bucket.my_bucket.id
+  bucket = "my-static-site-7e84fef1"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -41,8 +41,8 @@ resource "aws_s3_bucket_policy" "public_policy" {
         Effect    = "Allow"
         Principal = "*"
         Action    = ["s3:GetObject"]
-        Resource  = "${aws_s3_bucket.my_bucket.arn}/*"
-      }
+        Resource  = "arn:aws:s3:::my-static-site-7e84fef1/*"
+	}
     ]
   })
 }
@@ -51,7 +51,7 @@ resource "aws_s3_bucket_policy" "public_policy" {
 resource "aws_s3_object" "site_files" {
   for_each = toset(local.site_files)
 
-  bucket = aws_s3_bucket.my_bucket.id
+  bucket = "my-static-site-7e84fef1"
   key    = each.value
   source = "${path.module}/${each.value}"
 
@@ -64,5 +64,5 @@ resource "aws_s3_object" "site_files" {
 }
 
 output "site_url" {
-  value = aws_s3_bucket.my_bucket.website_endpoint
+  value = "http://my-static-site-7e84fef1.s3-website-us-east-1.amazonaws.com"
 }
