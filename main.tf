@@ -28,7 +28,7 @@ locals {
 #
   # Remove ACLs; rely on bucket policy for public access
 #  force_destroy = true
-}
+# }
 
 # Bucket policy to allow public read for objects
 resource "aws_s3_bucket_policy" "public_policy" {
